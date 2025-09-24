@@ -1,7 +1,7 @@
 {
   "name": "@adise/mcp-client-typescript",
   "version": "1.0.0",
-  "description": "A simple Node.js TypeScript project",
+  "description": "A TypeScript client for the Model Context Protocol (MCP) that enables seamless integration between Anthropic's Claude AI and MCP servers",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
@@ -11,8 +11,15 @@
     "clean": "rm -rf dist"
   },
   "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "anthropic",
+    "claude",
+    "ai",
     "typescript",
-    "node"
+    "node",
+    "tools",
+    "integration"
   ],
   "author": "",
   "license": "MIT",
