@@ -162,27 +162,6 @@ Closes connections and cleans up resources.
 | `ANTHROPIC_API_KEY` | Your Anthropic API key | Yes      | -                            |
 | `ANTHROPIC_MODEL`   | Claude model to use    | No       | `claude-3-5-sonnet-20241022` |
 
-## Project Structure
-
-```
-mcp_client_typescript/
-├── src/
-│   ├── client/
-│   │   ├── connection.ts    # MCP server connection logic
-│   │   ├── handlers.ts      # Query processing and tool execution
-│   │   └── chat-loop.ts     # Interactive chat interface
-│   ├── types.ts             # Type definitions
-│   └── utils/
-│       └── logger.ts        # Logging utilities
-├── docs/
-│   └── HOW_IT_WORKS.md      # Technical documentation
-├── dist/                    # Compiled JavaScript output
-├── index.ts                 # Main entry point
-└── package.json
-```
-
-## Development
-
 ### Scripts
 
 - `npm run build`: Compile TypeScript to JavaScript
@@ -203,99 +182,6 @@ npm run dev <path_to_server_script>
 ```
 
 ## Examples
-
-### Example MCP Server (Python)
-
-```python
-#!/usr/bin/env python3
-import json
-import sys
-from mcp.server import Server
-from mcp.server.stdio import stdio_server
-
-server = Server("example-server")
-
-@server.list_tools()
-async def list_tools() -> list:
-    return [
-        {
-            "name": "echo",
-            "description": "Echo back the input",
-            "inputSchema": {
-                "type": "object",
-                "properties": {
-                    "message": {"type": "string"}
-                },
-                "required": ["message"]
-            }
-        }
-    ]
-
-@server.call_tool()
-async def call_tool(name: str, arguments: dict) -> str:
-    if name == "echo":
-        return f"Echo: {arguments['message']}"
-    else:
-        raise ValueError(f"Unknown tool: {name}")
-
-if __name__ == "__main__":
-    stdio_server(server)
-```
-
-### Example MCP Server (JavaScript)
-
-```javascript
-#!/usr/bin/env node
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-
-const server = new Server(
-  {
-    name: "example-server",
-    version: "1.0.0",
-  },
-  {
-    capabilities: {
-      tools: {},
-    },
-  }
-);
-
-server.setRequestHandler("tools/list", async () => {
-  return {
-    tools: [
-      {
-        name: "echo",
-        description: "Echo back the input",
-        inputSchema: {
-          type: "object",
-          properties: {
-            message: { type: "string" },
-          },
-          required: ["message"],
-        },
-      },
-    ],
-  };
-});
-
-server.setRequestHandler("tools/call", async (request) => {
-  if (request.params.name === "echo") {
-    return {
-      content: [
-        {
-          type: "text",
-          text: `Echo: ${request.params.arguments.message}`,
-        },
-      ],
-    };
-  }
-  throw new Error(`Unknown tool: ${request.params.name}`);
-});
-
-const transport = new StdioServerTransport();
-server.connect(transport);
-```
 
 ## Troubleshooting
 
@@ -331,10 +217,6 @@ DEBUG=* npm start ./servers/my_server.py
 3. Make your changes
 4. Add tests if applicable
 5. Submit a pull request
-
-## License
-
-MIT License - see LICENSE file for details.
 
 ## Support
 
