@@ -1,5 +1,5 @@
 {
-  "name": "@adise/mcp-client-typescript",
+  "name": "cli-mcp-client",
   "version": "1.0.0",
   "description": "A TypeScript client for the Model Context Protocol (MCP) that enables seamless integration between Anthropic's Claude AI and MCP servers",
   "main": "dist/index.js",
